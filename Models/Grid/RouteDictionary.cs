@@ -56,6 +56,8 @@ namespace QuarterlySalesApp.Models.Grid
 
         private string Get(string key) => Keys.Contains(key) ? this[key] : null;
 
+
+
         public RouteDictionary Clone()
         {
             var clone = new RouteDictionary();

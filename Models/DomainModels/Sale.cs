@@ -1,6 +1,6 @@
 ﻿namespace QuarterlySalesApp.Models.DomainModels
 {
-    public class Sale : BaseModel
+    public class Sale : BaseEntity
     {
         public int Quarter { get; set; }
         public int Year { get; set; }

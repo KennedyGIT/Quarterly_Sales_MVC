@@ -1,32 +1,23 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using WebApplication1.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using QuarterlySalesApp.Models.DataLayer.Repositories;
+using QuarterlySalesApp.Models;
+using QuarterlySalesApp.Models.DomainModels;
 
-namespace WebApplication1.Controllers
+namespace QuarterlySalesApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private UnitOfWork unitOfWork { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(QuarterlyEmployeeSalesDbContext context) => unitOfWork = new UnitOfWork(context);
+        public ViewResult Index()
         {
-            _logger = logger;
-        }
+            var random = unitOfWork.Repository<Sale>().Get(new QueryOptions<Sale>
+            {
+                OrderBy = b => Guid.NewGuid()
+            });
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(random);
         }
     }
 }

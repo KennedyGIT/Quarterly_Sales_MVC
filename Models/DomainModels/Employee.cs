@@ -2,7 +2,7 @@
 
 namespace QuarterlySalesApp.Models.DomainModels
 {
-    public class Employee : BaseModel
+    public class Employee : BaseEntity
     {
         [Required(ErrorMessage = "Please enter a first name.")]
         [StringLength(200)]
