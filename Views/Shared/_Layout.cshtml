@@ -1,14 +1,51 @@
-﻿<!DOCTYPE html>
+﻿@using QuarterlySalesApp.Models.ViewModels
+@{
+    var current = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebApplication1</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Quarterly Sales @ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
+    <link href="~/css/site.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    @RenderSection("scripts", false)
 </head>
 <body>
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu"
+                    aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item @Nav.Active("Sales", current)">
+                        <a class="nav-link" asp-action="Sale" asp-controller="Sale" asp-area="">
+                            <span class="fas fa-home"></span>&nbsp;Sales
+                        </a>
+                    </li>
+                    <li class="nav-item @Nav.Active("Employee", current)">
+                        <a class="nav-link" asp-action="List" asp-controller="Employee" asp-area="">
+                            <span class="fas fa-book-open"></span>&nbsp;Employees
+                        </a>
+                    </li>
+                </ul>
+             
+            </div>
+        </nav>
+    </div>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -30,11 +67,6 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">

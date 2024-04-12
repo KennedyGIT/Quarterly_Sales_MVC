@@ -1,6 +1,6 @@
 ﻿namespace QuarterlySalesApp.Models.DomainModels
 {
-    public class BaseModel
+    public class BaseEntity
     {
         public int Id { get; set; }
     }
